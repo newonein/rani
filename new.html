@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Father's Day</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            overflow: hidden; /* Prevent scrollbars */
+        }
+        .heading-font {
+            font-family: 'Lora', serif;
+        }
+        /* Full-screen container for the background images */
+        .background-slider {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: -1; /* Place it behind all other content */
+        }
+        .background-slider .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            animation: crossfade 28s infinite; /* 4s per image */
+        }
+        .background-slider .slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the entire screen without distortion */
+            filter: blur(8px) brightness(0.7); /* Apply blur and a slight dim */
+        }
+
+        /* Animation Keyframes */
+        @keyframes crossfade {
+            0% { opacity: 0; }
+            10% { opacity: 1; } /* Fade in */
+            25% { opacity: 1; } /* Hold */
+            35% { opacity: 0; } /* Fade out */
+            100% { opacity: 0; }
+        }
+
+        /* Stagger the animation for each slide */
+        .background-slider .slide:nth-child(1) { animation-delay: 0s; }
+        .background-slider .slide:nth-child(2) { animation-delay: 4s; }
+        .background-slider .slide:nth-child(3) { animation-delay: 8s; }
+        .background-slider .slide:nth-child(4) { animation-delay: 12s; }
+        .background-slider .slide:nth-child(5) { animation-delay: 16s; }
+        .background-slider .slide:nth-child(6) { animation-delay: 20s; }
+        .background-slider .slide:nth-child(7) { animation-delay: 24s; }
+    </style>
+</head>
+<body class="bg-black">
+
+    <!-- Background Image Slider -->
+    <div class="background-slider">
+        <div class="slide"><img src="IMG_20250615_154424_601.jpg" alt="Blurred background image"></div>
+        <div class="slide"><img src="IMG_20250615_154329_337.jpg" alt="Blurred background image"></div>
+        <div class="slide"><img src="IMG-20250501-WA0016.jpg" alt="Blurred background image"></div>
+        <div class="slide"><img src="IMG_20250615_154358_641.jpg" alt="Blurred background image"></div>
+        <div class="slide"><img src="IMG-20250501-WA0017.jpg" alt="Blurred background image"></div>
+        <div class="slide"><img src="IMG_20250615_154355_260.jpg" alt="Blurred background image"></div>
+        <div class="slide"><img src="IMG_20250615_154345_714.jpg" alt="Blurred background image"></div>
+    </div>
+
+    <!-- Centered Foreground Content -->
+    <div class="min-h-screen flex items-center justify-center text-center p-4">
+        <h1 class="heading-font text-5xl md:text-8xl font-bold text-white tracking-wider" style="text-shadow: 2px 2px 8px rgba(0,0,0,0.7);">
+            Happy Father's Day
+        </h1>
+    </div>
+
+</body>
+</html>
