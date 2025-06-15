@@ -13,8 +13,19 @@
     <style>
         body {
             font-family: 'Poppins', sans-serif;
+            background-color: #f8fafc; /* Fallback */
+            background-image: linear-gradient(to top right, #e0e7ff, #f3e8ff);
+            overflow-x: hidden; /* Prevent horizontal scroll from hearts */
         }
-        .prose-text {
+        .main-card {
+            background-color: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            position: relative;
+            z-index: 10;
+        }
+        .heading-font {
             font-family: 'Lora', serif;
         }
         .hidden {
@@ -22,8 +33,8 @@
         }
         /* Custom styles for the slider */
         .swiper {
-            width: 320px; /* Set a specific width for the card effect */
-            height: 420px; /* Set a specific height for the card effect */
+            width: 300px; /* Adjusted for better mobile view */
+            height: 400px;
         }
         .swiper-slide {
             display: flex;
@@ -33,15 +44,15 @@
             font-size: 22px;
             font-weight: bold;
             color: #fff;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
         .swiper-slide img {
             display: block;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 18px; /* Match the slide's border-radius */
+            border-radius: 18px;
         }
-         /* Styling for navigation arrows */
         .swiper-button-next,
         .swiper-button-prev {
             color: #ffffff;
@@ -50,77 +61,114 @@
         }
         .swiper-button-next::after,
         .swiper-button-prev::after {
-             text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.6);
+             text-shadow: 0px 0px 8px rgba(0, 0, 0, 0.7);
+             font-size: 28px;
         }
-
+        /* Floating Hearts Animation */
+        .hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 24px;
+            color: #f472b6; /* Pink color */
+            animation: floatUp 10s linear infinite;
+            opacity: 0;
+        }
+        @keyframes floatUp {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
     </style>
 </head>
-<body class="bg-slate-50">
+<body class="min-h-screen flex items-center justify-center p-4">
 
-    <div class="container mx-auto max-w-3xl px-4 py-12 md:py-20">
+    <!-- Container for floating hearts -->
+    <div id="hearts-container" class="hearts-container"></div>
+
+    <div class="container mx-auto max-w-3xl">
         
-        <div class="bg-white rounded-xl shadow-xl p-8 md:p-12">
-            <header class="text-center mb-8">
-                <h1 class="text-4xl font-bold text-slate-800 tracking-tight">For Rani</h1>
-                <p class="text-slate-500 mt-2">A message of strength and love.</p>
+        <div class="main-card rounded-2xl shadow-2xl p-6 md:p-10">
+            <header class="text-center mb-10">
+                <h1 class="heading-font text-4xl md:text-5xl font-bold text-slate-800 tracking-tight">For Rani</h1>
+                <p class="text-slate-500 mt-3 text-lg">A message of strength and love.</p>
             </header>
 
-            <article class="prose-text text-slate-700 text-lg leading-relaxed space-y-6">
+            <article class="heading-font text-slate-700 text-lg leading-relaxed space-y-6 text-center md:text-left">
                 <p>
-                    Dear Rani, we know that days like today can be heavy. They carry the weight of memory, of "what ifs," and of a presence deeply missed. Your father was a hero who stood guard at our nation's border, and his sacrifice is a debt we can never repay. His bravery is a legacy that shines brightly within you.
+                    Dear Rani, on a day like this, we know the world can feel a little quieter, a little heavier. It’s a day filled with memories, with unspoken words, and with the profound ache of missing someone so deeply. Your father was a hero in the truest sense, a guardian who stood watch over our nation at its border. His sacrifice is a story of immense bravery, a legacy that now lives on brightly and fiercely within you.
                 </p>
                 <p>
-                    Even though you couldn't say a final goodbye, know that a hero's love never truly leaves. It transforms. He is with you always. He is the silent star in your night sky, the gentle breeze that encourages you to keep walking, the unwavering strength you feel in your heart when you feel alone. He is your guardian, protecting you, your sister, and your mother from afar, wrapped in the flag he so proudly served.
+                    Though you never had the chance for a final goodbye, a love like his doesn't end. It transforms. It becomes the quiet strength you feel in moments of doubt, the gentle warmth of the sun on your face, the guiding star in the darkest night. He is with you always, a silent protector for you, your sister, and your mother—forever wrapped in the honor of the flag he served.
                 </p>
                 <p>
-                    His final wish would be simple: for his girls to be happy, to be strong, and to give their very best in everything they do. He is watching over you, filled with pride for the wonderful young woman you are becoming. Your strength, combined with your mother's grace and your sister's love, is the greatest tribute to the hero he was. We are all standing with you, today and always. Look to the future with courage—he is right there with you.
+                    His greatest wish would be simple: to see his girls live with joy, with courage, and with the same strength he showed the world. He watches over you with a father's endless pride, celebrating the incredible young woman you are becoming. The bond you share with your mother and sister is the most beautiful tribute to his memory. Know that you are never alone in this. We all stand with you, today and always. Face the future with your head held high, and feel his love with every step you take.
                 </p>
             </article>
 
-            <!-- Photo Slider Section -->
             <section class="mt-12">
-                <h2 class="text-2xl font-bold text-slate-700 text-center mb-6">In Loving Memory</h2>
-                <!-- Swiper -->
-                <div class="swiper mySwiper">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide"><img src="IMG_20250615_154424_601.jpg" alt="Family photo with father, mother, and two daughters."></div>
-                        <div class="swiper-slide"><img src="IMG_20250615_154329_337.jpg" alt="Father in his uniform."></div>
-                        <div class="swiper-slide"><img src="IMG_20250615_154358_641.jpg" alt="Father celebrating with his two daughters and a cake."></div>
-                        <div class="swiper-slide"><img src="IMG_20250615_154355_260.jpg" alt="Father and mother together."></div>
-                        <div class="swiper-slide"><img src="IMG_20250615_154345_714.jpg" alt="A portrait of the father."></div>
+                <h2 class="heading-font text-3xl font-bold text-slate-700 text-center mb-8">In Loving Memory</h2>
+                <div class="flex justify-center">
+                    <div class="swiper mySwiper">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide"><img src="IMG_20250615_154424_601.jpg" alt="Family photo"></div>
+                            <div class="swiper-slide"><img src="IMG_20250615_154329_337.jpg" alt="Father in uniform"></div>
+                            <div class="swiper-slide"><img src="IMG-20250501-WA0016.jpg" alt="Father, mother, and a young child."></div>
+                            <div class="swiper-slide"><img src="IMG_20250615_154358_641.jpg" alt="Father with daughters"></div>
+                            <div class="swiper-slide"><img src="IMG_20250501-WA0017.jpg" alt="Father with two young women outdoors."></div>
+                            <div class="swiper-slide"><img src="IMG_20250615_154355_260.jpg" alt="Father and mother"></div>
+                            <div class="swiper-slide"><img src="IMG_20250615_154345_714.jpg" alt="Portrait of father"></div>
+                        </div>
+                        <div class="swiper-button-next"></div>
+                        <div class="swiper-button-prev"></div>
                     </div>
-                     <div class="swiper-button-next"></div>
-                    <div class="swiper-button-prev"></div>
                 </div>
             </section>
+            
+            <hr class="my-12 border-slate-300/70">
 
-
-            <!-- This section contains the form and the confirmation message logic -->
-            <div class="mt-12 border-t pt-8 text-center">
-                <h3 class="text-xl font-semibold text-slate-800 mb-4">Send a Message of Support</h3>
-                
+            <div class="text-center">
+                <h3 id="formHeader" class="heading-font text-2xl font-semibold text-slate-800 mb-4">Share Your Words of Comfort</h3>
                 <form name="submit-message-to-google-sheet" id="messageForm">
-                    <textarea name="message" class="w-full h-28 p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-left" placeholder="Write your message here..." required></textarea>
+                    <textarea name="message" class="w-full h-28 p-4 bg-white/50 border-slate-300/70 rounded-lg focus:outline-none focus:ring-2 focus:ring-teal-500 text-left placeholder-slate-500" placeholder="Write your message here..." required></textarea>
                     <div class="text-center mt-4">
-                        <button type="submit" id="submitButton" class="bg-teal-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-teal-700 transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
+                        <button type="submit" id="submitButton" class="bg-teal-600 text-white font-bold py-3 px-10 rounded-lg hover:bg-teal-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-teal-500">
                             Send with Love
                         </button>
                     </div>
                 </form>
-
-                <div id="formMessage" class="font-medium mt-4"></div>
+                <div id="formMessage" class="font-medium mt-4 h-6"></div>
             </div>
+
+            <!-- Navigation to Next Page -->
+            <div class="mt-8 text-center">
+                <a href="new.html" class="inline-block bg-indigo-600 text-white font-bold py-3 px-10 rounded-lg hover:bg-indigo-700 transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                    Next
+                </a>
+            </div>
+
         </div>
     </div>
 
-    <!-- Link to Swiper's JS -->
     <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
-
     <script>
-        // --- Initialize Swiper with Card Effect ---
+        // --- Initialize Swiper ---
         var swiper = new Swiper(".mySwiper", {
-            effect: "cards", // Set the transition effect to 'cards'
-            grabCursor: true, // Show a "grab" cursor on hover
+            effect: "cards",
+            grabCursor: true,
             navigation: {
                 nextEl: ".swiper-button-next",
                 prevEl: ".swiper-button-prev",
@@ -133,47 +181,67 @@
 
         // --- Form Submission Logic ---
         const form = document.forms['submit-message-to-google-sheet'];
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbwkoUYn1q6oTBg8Lgf8YZ2B4Kh0uK-EqObvh6M2RNfmi4GdI131Vt5YM7KROt0GsbA0HA/exec';
+        const scriptURL = 'YOUR_GOOGLE_APPS_SCRIPT_URL';
+        const formContainer = document.getElementById('messageForm').parentElement;
         const formMessageDiv = document.getElementById('formMessage');
-        const submitButton = document.getElementById('submitButton');
 
         form.addEventListener('submit', e => {
             e.preventDefault();
-            
+            const submitButton = form.querySelector('button[type="submit"]');
             submitButton.disabled = true;
             submitButton.textContent = 'Sending...';
-            formMessageDiv.textContent = '';
             
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                 .then(response => response.json())
                 .then(data => {
                     if (data.result === 'success') {
-                        console.log('Success:', data);
-                        form.classList.add('hidden'); 
-                        formMessageDiv.textContent = 'Your message has been sent successfully.';
-                        formMessageDiv.className = 'font-medium mt-4 text-green-600';
+                        form.classList.add('hidden');
+                        formMessageDiv.textContent = 'Your message has been sent.';
+                        formMessageDiv.className = 'font-medium mt-4 h-6 text-green-600';
+                        
                         setTimeout(() => {
+                            formMessageDiv.textContent = '';
                             form.reset();
                             form.classList.remove('hidden');
-                            formMessageDiv.textContent = '';
-                            formMessageDiv.className = 'font-medium mt-4';
-                        }, 3000); 
+                            submitButton.disabled = false;
+                            submitButton.textContent = 'Send with Love';
+                        }, 3000);
 
-                    } else {
-                        throw new Error(data.error || 'An unknown error occurred');
+                    } else { 
+                        throw new Error(data.error || 'Unknown error'); 
                     }
                 })
                 .catch(error => {
-                    console.error('Error!', error.message);
                     formMessageDiv.textContent = 'An error occurred. Please try again.';
-                    formMessageDiv.className = 'mt-4 text-center font-medium text-red-600';
-                })
-                .finally(() => {
+                    formMessageDiv.className = 'font-medium mt-4 h-6 text-red-600';
                     submitButton.disabled = false;
                     submitButton.textContent = 'Send with Love';
                 });
         });
-    </script>
 
+        // --- Floating Hearts Logic ---
+        const heartsContainer = document.getElementById('hearts-container');
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '&#x2665;'; // Heart character
+            
+            // Randomize position, size, and animation duration
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 5 + 5 + 's'; // 5-10 seconds
+            heart.style.fontSize = Math.random() * 10 + 10 + 'px'; // 10-20px
+            heart.style.opacity = Math.random() * 0.5 + 0.2; // 0.2-0.7 opacity
+            
+            heartsContainer.appendChild(heart);
+
+            // Remove heart after animation finishes to keep DOM clean
+            setTimeout(() => {
+                heart.remove();
+            }, 10000);
+        }
+
+        // Create hearts at intervals
+        setInterval(createHeart, 500); // Create a new heart every 500ms
+    </script>
 </body>
 </html>
